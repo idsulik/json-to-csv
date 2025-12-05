@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON to CSV Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JSON to CSV Converter</h1>
+            <p>Fast, secure, and client-side conversion.</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="paste">Paste JSON</button>
+                    <button class="tab-btn" data-tab="upload">Upload File</button>
+                </div>
+
+                <div class="tab-content active" id="paste-tab">
+                    <textarea id="json-input" placeholder="Paste your JSON here... (e.g. [{'name': 'John', 'age': 30}])"></textarea>
+                </div>
+
+                <div class="tab-content" id="upload-tab">
+                    <div class="upload-area" id="drop-zone">
+                        <p>Drag & drop your JSON file here or</p>
+                        <input type="file" id="file-input" accept=".json">
+                        <label for="file-input" class="btn secondary">Browse Files</label>
+                        <p id="file-name" class="file-name hidden"></p>
+                    </div>
+                </div>
+
+                <div class="settings-panel">
+                    <div class="setting-group">
+                        <label for="drpDelimiter">Delimiter</label>
+                        <select id="drpDelimiter">
+                            <option value=",">comma</option>
+                            <option value="	">tab</option>
+                            <option value=";">semicolon</option>
+                            <option value="|">pipe</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="drpNested">Nested Data</label>
+                        <select id="drpNested">
+                            <option value="unwind" selected>Header / Detail report style</option>
+                            <option value="flatten">All on same row (inside separate columns)</option>
+                            <option value="concat">Concatenate (inside shared columns)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="drpColumnOrder">Column Order</label>
+                        <select id="drpColumnOrder">
+                            <option value="original">Original order</option>
+                            <option value="smart">Smart ordering (Alphabetical)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group checkbox-group">
+                        <label for="chkEpoch" class="checkbox-label">
+                            <input id="chkEpoch" type="checkbox">
+                            <span>Epoch -> yyyymmdd</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="convert-btn" class="btn primary">Convert to CSV</button>
+                    <button id="clear-btn" class="btn text">Clear</button>
+                </div>
+                <div id="error-msg" class="error-message hidden"></div>
+            </div>
+
+            <div class="output-section hidden" id="output-section">
+                <div class="output-header">
+                    <h2 id="preview-header">Preview (First 30 rows)</h2>
+                    <div class="output-actions">
+                        <span id="row-count" class="meta-info"></span>
+                        <button id="copy-btn" class="btn secondary">Copy CSV</button>
+                        <button id="download-btn" class="btn primary">Download .csv</button>
+                    </div>
+                </div>
+                
+                <div class="preview-container">
+                    <table id="csv-preview">
+                        <!-- Preview content will go here -->
+                    </table>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>100% Client-side. Your data never leaves your browser.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
